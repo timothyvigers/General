@@ -1,0 +1,26 @@
+---
+title: "Most Featured Artists"
+author: "Tim & Tash"
+date: "3/23/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(knitr)
+library(spotifyr)
+id <- 'd7a4c8bf1b7d4efaabf2c4c8a2385c31'
+secret <- '106e34e81592403eb8d7e1e980daf525'
+Sys.setenv(SPOTIFY_CLIENT_ID = id)
+Sys.setenv(SPOTIFY_CLIENT_SECRET = secret)
+access_token <- get_spotify_access_token()
+my_id <- 'fmnrxbeh86pew8ge485y7k894'
+```
+
+```{r}
+tracks <- get_playlist_tracks("0T6GXgT9tOI3b7A5VrxZy8")
+temp <- bind_rows(tracks$track.artists)
+features <- get_artists(as.character(temp$id)[1:50])
+genres <- unlist(features$genres)
+```

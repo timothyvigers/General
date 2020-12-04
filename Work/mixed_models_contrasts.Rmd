@@ -1,0 +1,54 @@
+---
+title: "Mixed Models and Contrasts in R"
+author: "Kristen Campbell & Tim Vigers"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: html_document
+---
+
+```{r setup,message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(ggplot2)
+library(lme4)
+library(nlme)
+library(emmeans)
+data("Orthodont")
+```
+
+## Data Structure and Plot
+
+We'll be working with growth curve data on an orthodontic measurement from the nlme package. There were 27 participants, who were measured at ages 8, 10, 12, and 14. 
+
+```{r}
+kable(head(Orthodont))
+ggplot(Orthodont,aes(x=age,y=distance,group=Subject)) + 
+  geom_line(aes(color=Subject)) +
+  theme(legend.position = "none")
+```
+
+## Which package should I use?
+
+There are two commonly used packages for mixed models in R: lme4 and nlme. In most situations the two are equally good, but lme4 has better error messages while nlme provides p-values for estimates. If you have any concerns that a model will not converge, it's probably best to run the model with both packages and compare the results. Luckily the syntax is very similar for most applications, so this doesn't take too much extra time. 
+
+## Specifying random effects
+
+When using lme(), the main function in the nlme package, random effects are specified in the random argument. lmer(), from the lme4 package, specifies random effects in the model formula. Start with a random intercept for subject:
+
+```{r}
+lme_mod <- lme(distance ~ age + Sex, random = ~1|Subject, data = Orthodont)
+lmer_mod <- lmer(distance ~ age + Sex + (1|Subject), data = Orthodont)
+```
+
+## Compare the fixed effect results:
+
+### lme()
+
+```{r echo=FALSE}
+kable(summary(lme_mod)$tTable)
+```
+
+### lmer()
+
+```{r echo=FALSE}
+kable(summary(lmer_mod)$coefficients)
+```
