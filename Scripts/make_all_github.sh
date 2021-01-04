@@ -18,3 +18,6 @@ make
 cd /Users/timvigers/GitHub/bcftools
 git pull
 make
+
+cd /Users/timvigers/GitHub/logseq
+git pull
