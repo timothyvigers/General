@@ -1,6 +1,4 @@
 #!/bin/bash
-cd /home/tim/.local/share/Cryptomator/mnt/Vault/Music
+cd /Volumes/Documents/Music
 find . -type f ! -name "*.flac" ! -name "*.mp3" -delete
 find . -type d -empty -delete
-cd ~
-rsync -auv /home/tim/.local/share/Cryptomator/mnt/Vault/Music/ /media/tim/SD_CARD/MUSIC/ --delete
