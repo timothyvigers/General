@@ -27,7 +27,15 @@
 \documentclass[12pt,letterpaper,sans]{moderncv} % Font sizes: 10, 11, or 12; paper sizes: a4paper, letterpaper, a5paper, legalpaper, executivepaper or landscape; font families: sans or roman
 
 \moderncvstyle{casual} % CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
-\moderncvcolor{blue} % CV color - options include: 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+\patchcmd{\makeletterhead}% <cmd>
+  {\raggedright \@opening}% <search>
+  {\@opening}% <replace>
+  {}{}% <success><failure>
+\makeatother
+
+\moderncvcolor{purple} % CV color - options include: 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
 \usepackage[style=authoryear,sorting=ydnt,dashed=false]{biblatex}
 
 \renewbibmacro*{date}{}
@@ -71,6 +79,31 @@
 
 %----------------------------------------------------------------------------------------
 
+% Define \cvdoublecolumn, which sets its arguments in two columns without any labels
+
+\newcommand{\cvdoublecolumn}[2]{%
+  \cvitem[0.75em]{}{%
+    \begin{minipage}[t]{\listdoubleitemcolumnwidth}#1\end{minipage}%
+    \hfill%
+    \begin{minipage}[t]{\listdoubleitemcolumnwidth}#2\end{minipage}%
+    }%
+}
+
+% usage: \cvreference{name}{address line 1}{address line 2}{address line 3}{address line 4}{e-mail address}{phone number}
+% Everything but the name is optional
+% If \addresssymbol, \emailsymbol or \phonesymbol are specified, they will be used.
+% (Per default, \addresssymbol isn't specified, the other two are specified.)
+% If you don't like the symbols, remove them from the following code, including the tilde ~ (space).
+
+\newcommand{\cvreference}[7]{%
+    \textbf{#1}\newline% Name
+    \ifthenelse{\equal{#2}{}}{}{\addresssymbol~#2\newline}%
+    \ifthenelse{\equal{#3}{}}{}{#3\newline}%
+    \ifthenelse{\equal{#4}{}}{}{#4\newline}%
+    \ifthenelse{\equal{#5}{}}{}{#5\newline}%
+    \ifthenelse{\equal{#6}{}}{}{\emailsymbol~\texttt{#6}\newline}%
+    \ifthenelse{\equal{#7}{}}{}{\phonesymbol~#7}}
+
 \begin{document}
 
 %----------------------------------------------------------------------------------------
@@ -81,19 +114,32 @@
 
 \clearpage
 
-\recipient{HR Department}{Corporation\\123 Pleasant Lane\\12345 City, State} % Letter recipient
+\recipient{University of Colorado}{CU Anschutz Medical Campus\\School of Medicine, Department of Pediatrics\\Section of Endocrinology} % Letter recipient
 \date{\today} % Letter date
-\opening{Dear Sir or Madam,} % Opening greeting
-\closing{Sincerely yours,} % Closing phrase
-\enclosure[Attached]{curriculum vit\ae{}} % List of enclosed documents
+\opening{To whom it may concern,} % Opening greeting
 
 \makelettertitle % Print letter title
-
-\lipsum[1-2] % Dummy text
-\lipsum[4] % Dummy text
-
-\makeletterclosing % Print letter signature
-
+I am excited to apply for the Biostatistics Research Instructor position with the Department of 
+Pediatrics Endocrinology Section. I have just over two years' experience with biostatistics
+consulting at the Barbara Davis Center as part of my graduate student research assistant role. 
+I will be defending my biostatistics MS thesis at the end of May, and would love the opportunity 
+to continue in and expand on my role at the BDC after graduation. 
+\newline{}\newline{}
+During my time at the BDC, I've had the opportunity to work on multiple research projects 
+covering a wide range of statistical methods at every stage of the clinical research process from 
+study design and power calculations to manuscript writing and review. Our work has provided me with experience 
+in all of the technical competencies required for this position, and all of our projects have resulted in published conference abstracts or peer reviewed manuscripts. 
+In addition to technical proficiency with programming and statistical modeling, I believe the Child Health Biostatistics Core
+would benefit from my attention to detail, ability to manage multiple projects at once while maintaining
+a high standard, positive outlook even under pressure, and enthusiasm for exploring new statistical
+and machine learning techniques.
+\newline{}\newline{}
+I believe I would be an excellent fit for this position given my work experience at both 
+Children's Hospital Colorado and the Barbara Davis Center, and hope to hear from you soon.
+\newline{}\newline{}\newline{}
+Sincerely,
+\newline{}\newline{}
+Tim Vigers
 \newpage
 
 %----------------------------------------------------------------------------------------
@@ -132,7 +178,7 @@
 \item Genome-wide association studies, including data pre-processing, imputation, and implementation of novel analysis pipelines.
 \item Joint modeling for longitudinal continuous glucose monitor (CGM) and time-to-event data.
 \item Wrote and maintained an R package for analysis of CGM data which has been downloaded approximately 20,000 times.
-\item Developed interactive applications in R Shiny and Python Dash to help investigators visualize and interpret data.
+\item Developed interactive applications in R Shiny and Python Dash.
 \end{itemize}}
 
 %------------------------------------------------
@@ -177,10 +223,46 @@
 
 \cvlistdoubleitem{Music}{Cooking}
 \cvlistdoubleitem{Running}{Reading}
-\cvlistdoubleitem{Videogames}{Basketball}
+\cvlistdoubleitem{Movies}{Basketball}
 
 %----------------------------------------------------------------------------------------
 \newpage
 \nocite{bergetSixMonthsHybrid2020,carreauClinicalPredictionScore2019,chanContinuousGlucoseMonitoring2018,chanHemoglobinA1cAccurately2018,liContinuousGlucoseMonitoring2019,messerRealWorldHybrid2020,odonnellPumpItRandomized2021,raviPediatricMedicaidPatients2020,shahTypeDiabetesOnset2019,sherkAcuteHyperinsulinemiaAlters2020,simonReducedInsulinSensitivity2018,sopfeSafetyAccuracyFactoryCalibrated2020,tommerdahlScreeningCysticFibrosis2019,vigersCgmanalysisPackageDescriptive2019a}
 \printbibliography[title={Publications}]
+\newpage
+\section{References}
+
+\cvdoublecolumn{\cvreference{Nicolai Reshetikhin}
+    {Department of Mathematics}
+    {University of California}
+    {Berkeley, CA 94720-3840}
+    {}
+    {reshetik@math.berkeley.edu}
+    {510-643-6234}%
+    }
+    {\cvreference{Mikhail Khovanov}
+    {Department of Mathematics}
+    {Columbia University}
+    {990 Broadway}
+    {New York, NY 10027}
+    {khovanov@columbia.edu}
+    {212-854-4186}%
+    }
+
+\cvdoublecolumn{\cvreference{Roman Bezrukavnikov}
+    {Department of Mathematics}
+    {Massachusetts Institute of Technology}
+    {77 Massachusetts Avenue}
+    {Cambridge, MA 02139}
+    {bezrukav@math.mit.edu}
+    {617-253-2684}
+    }
+    {\cvreference{Tom Braden}
+    {Department of Mathematics}
+    {University of Massachusetts}
+    {Amherst, MA 94720-3840}
+    {}
+    {braden@math.umass.edu}
+    {413-545-1732}
+    }
 \end{document}
