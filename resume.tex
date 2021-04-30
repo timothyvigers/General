@@ -1,191 +1,186 @@
-% Change the size of the paper your CV will be printed on
-% by entering either a4paper or letterpaper here.
-\documentclass[letterpaper]{ReadableCV}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% "ModernCV" CV and Cover Letter
+% LaTeX Template
+% Version 1.3 (29/10/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Xavier Danaux (xdanaux@gmail.com) with modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Important note:
+% This template requires the moderncv.cls and .sty files to be in the same 
+% directory as this .tex file. These files provide the resume style and themes 
+% used for structuring the document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Set color of body text
-\color{black}
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt,letterpaper,sans]{moderncv} % Font sizes: 10, 11, or 12; paper sizes: a4paper, letterpaper, a5paper, legalpaper, executivepaper or landscape; font families: sans or roman
+
+\moderncvstyle{casual} % CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
+\moderncvcolor{blue} % CV color - options include: 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+\usepackage[style=authoryear,sorting=ydnt,dashed=false]{biblatex}
+
+\renewbibmacro*{date}{}
+\renewbibmacro*{date+extrayear}{}
+\renewbibmacro*{issue+date}{}
+\newcommand*{\bibyear}{}
+
+\defbibenvironment{bibliography}
+  {\list
+     {\iffieldequals{year}{\bibyear}
+        {}
+        {\printfield{year}%
+         \savefield{year}{\bibyear}}}
+     {\setlength{\topsep}{0pt}% layout parameters based on moderncvstyleclassic.sty
+      \setlength{\labelwidth}{\hintscolumnwidth}%
+      \setlength{\labelsep}{\separatorcolumnwidth}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \leftmargin\labelwidth%
+      \advance\leftmargin\labelsep}%
+      \sloppy\clubpenalty4000\widowpenalty4000}
+  {\endlist}
+  {\item}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage[scale=0.75]{geometry} % Reduce document margins
+%\setlength{\hintscolumnwidth}{3cm} % Uncomment to change the width of the dates column
+%\setlength{\makecvtitlenamewidth}{10cm} % For the 'classic' style, uncomment to adjust the width of the space allocated to your name
+%----------------------------------------------------------------------------------------
+%	NAME AND CONTACT INFORMATION SECTION
+%----------------------------------------------------------------------------------------
+\firstname{Tim} % Your first name
+\familyname{Vigers} % Your last name
+\addbibresource{references.bib}
+% All information in this block is optional, comment out any lines you don't need
+\title{Curriculum Vitae}
+\address{1150 Leyden St.}{Denver, CO 80220}
+\mobile{720.394.5769}
+\email{tim.b.vigers@gmail.com}
+\homepage{github.com/timothyvigers}{} % The first argument is the url for the clickable link, the second argument is the url displayed in the template - this allows special characters to be displayed such as the tilde in this example
+
+%----------------------------------------------------------------------------------------
 
 \begin{document}
-	
-% Set page colour using X11names colour definitions
-\setPageColour{white}
 
-% Set header details being aligned to the right or left
-% If an image is displayed it will be shown on the
-% opposite side to what is set here.
-\setHeaderAlignment{left}
+%----------------------------------------------------------------------------------------
+%	COVER LETTER
+%----------------------------------------------------------------------------------------
 
-% Set colour of all headings, header highlights
-\setHeadingColours{SlateGray3}
+% To remove the cover letter, comment out this entire block
 
-% Set image file to be displayed in header
-% If left blank no image is displayed
-%\setImage{profilepic.jpg}
+\clearpage
 
-% If image not being displayed then user can
-% move contact details to opposite side of
-% page to name and jobtitle.
-% Use either opposite or below
-\setContactLocation{opposite}
+\recipient{HR Department}{Corporation\\123 Pleasant Lane\\12345 City, State} % Letter recipient
+\date{\today} % Letter date
+\opening{Dear Sir or Madam,} % Opening greeting
+\closing{Sincerely yours,} % Closing phrase
+\enclosure[Attached]{curriculum vit\ae{}} % List of enclosed documents
 
-% Set up information needed for header.
-% If you do not want to include certain
-% information use {} instead. 
-\setYourName{Jobseeker}
-\setYourJobTitle{Job title}
-\setYourMobileNo{Mobile phone}
-\setYourHomeNo{Home phone}
-\setYourEmailAddr{Email address}
-\setYourWebAddr{Web address}
+\makelettertitle % Print letter title
 
-% Display header information 
-\showHeader
+\lipsum[1-2] % Dummy text
+\lipsum[4] % Dummy text
 
-% Set up whether section headings are on the left or right
-\setSectionAlignment{left}
+\makeletterclosing % Print letter signature
 
-% Creates a new section title / heading
-\newHeading{Personal Profile}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-\newHeading{Core Skills}
-
-% Add up to nine core skills. If they are
-% all not needed use {} instead.
-\addSkills{Skill one}
-		  {Skill two}
-		  {Skill three}
-		  {Skill four}
-		  {Skill five}
-		  {Skill six}
-		  {Skill seven}
-		  {Skill eight}
-		  {Skill nine}
-		  
-\newHeading{Career Summary}
-
-% Set up whether job title or company printed first
-% Either use JobFirst or CompanyFirst
-\setJobCompanyOrder{JobFirst}
-
-% This displays the whole of the role information
-% including dates [1], job title [2],
-% company name [3] and role summary [4]
-% If a full history is required use \newrole and \roleAchievements
-% If only a brief description needed then just use \newrole
-\newRole{2018 -- present}
-        {Job title}
-        {Company name}
-        {A short summary broadly detailing what the role involves. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-
-
-\roleAchievements{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-
-\newRole{2007 -- 2018}
-{Job title}
-{Company name}
-{A short summary broadly detailing what the role involves. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-
-\roleAchievements{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-
-\newRole{1999 -- 2006}
-{Job title}
-{Company name}
-{A short summary broadly detailing what the role involves. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-
-\roleAchievements{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-
-\newRole{2003 -- 2006}{Job title}{Company name}{A short summary broadly detailing what the role involves. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-\newRole{2002 -- 2003}{Job title}{Company name}{A short summary broadly detailing what the role involves. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-\newRole{2001 -- 2003}{Job title}{Company name}{A short summary broadly detailing what the role involves. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia gravida pellentesque.}
-
-% move, duplicate, delete or comment out the following line if necessary
 \newpage
 
-% This is training you have done in your own time
-\newHeading{Personal Development}
+%----------------------------------------------------------------------------------------
+%	CURRICULUM VITAE
+%----------------------------------------------------------------------------------------
 
-\newCourse{2019}
-{Course title}
-{Awarding body}{}
+\makecvtitle % Print the CV title	
 
-\newCourse{2019}
-{Course title}
-{Awarding body}{}
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
 
-\newCourse{2019}
-{Course title}
-{Awarding body}{}
+\section{Education}
 
-% School education
-\newHeading{Education}
-         
-\newCourse{2000 - 2002}{Course title}{Awarding body}{}
-\newCourse{1996 - 1998}{Course title}{Awarding body}{}
-\newCourse{1994 - 1996}{Course title}{Awarding body}{}
-\newCourse{1989 - 1994}{Course title}{Awarding body}{}
-          
-\clearpage
- 
-% Anything below creates a letter
- 
-% Displays same header as on CV
-\showHeader
+\cventry{2018--2021}{Master of Science}{The University of Colorado}{Denver}{}{Biostatistics}
+\cventry{2011--2014}{Bachelor of Arts}{The University of Colorado}{Boulder}{}{Molecular, Cellular, and Developmental Biology}  
 
+\section{Masters Thesis}
 
+\cvitem{Title}{\emph{A Mediation Approach to Discovering Causal Relationships Between the Metabolome and DNA Methylation in Type 1 Diabetes}}
+\cvitem{Supervisors}{Katerina Kechris, PhD, Lauren Vanderlinden, MS, and Jill Norris, PhD}
 
-% Name and address must be present but
-% job title is optional
-\setRecpName{Mr Deeds}
-\setRecpJobTitle{Hiring Manager}
-\setRecpRoad{BigCorp Road}
-\setRecpTown{BigCorp Town}
-\setRecpCity{BigCorp City}
-\setRecpPostcode{X12 3YZ}
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
 
-\makeLetter
+\section{Experience}
 
-% Do not delete \recpname unless you want to call the
-% recipient something other than the name defined above.
-Dear \recpname,
+\cventry{2018--Present}{Graduate Research Assistant}{\textsc{University of Colorado}}{Denver}{}{I am currently a graduate student in the CU Denver biostatistics MS program. In my research assistant position I have consulted with investigators and clinicians on REDCap database design and data collection, protocol and grant review, study design and randomization schemes, power calculations, manuscript review, and statistical analyses. Responsibilities included:
+\newline{}
+\begin{itemize}
+\item Longitudinal analysis using generalized linear mixed models
+\item Logistic regression, ROC curves, and other predictive modeling techniques including random forest and deep learning
+\item Multivariate analysis of high dimensional omics data, primarily using PLS-DA
+\item Shrinkage regression techniques for model selection.
+\item Genome-wide association studies, including data pre-processing, imputation, and implementation of novel analysis pipelines.
+\item Joint modeling for longitudinal continuous glucose monitor (CGM) and time-to-event data.
+\item Wrote and maintained an R package for analysis of CGM data which has been downloaded approximately 20,000 times.
+\item Developed interactive applications in R Shiny and Python Dash to help investigators visualize and interpret data.
+\end{itemize}}
 
-% Do not remove the following line
-\bigskip
+%------------------------------------------------
 
-Please find enclosed my CV in application for the post advertised in the [insert place advertised] on [date advert seen].
+\cventry{2015--2018}{Professional Research Assistant}{\textsc{Children's Hospital Colorado}}{Aurora, CO}{}{
+\begin{itemize}
+    \item Managed two NIH-funded research studies. 
+    \item Recruited, screened, and obtained consent from over 190 study subjects. 
+    \item Perform all study visits and some sample processing for both studies. 
+    \item Developed a manual of procedures for all study activities and performed all regulatory processes (IRB amendments, continuing review, AE reporting, etc.).
+    \item Responsible for all data management and entry for both studies. 
+\end{itemize}}
 
-The nature of my [qualification] has prepared me for this position. It involved a great deal of independent research, requiring initiative, self-motivation and a wide range of skills. One of my courses, [insert course], an understanding of the [insert sector] industry was essential. I found this subject very interesting.
+%----------------------------------------------------------------------------------------
+%	COMPUTER SKILLS SECTION
+%----------------------------------------------------------------------------------------
 
-I am a fast and accurate writer, with a keen eye for detail and I should be very grateful for the opportunity to progress. I am able to take on the responsibility of this position immediately, and have the enthusiasm and determination to ensure that I make a success of it.
+\section{Computer skills}
 
-Thank you for taking the time to consider this application and I look forward to hearing from you in the near future.
+\cvitem{Basic}{\textsc{SAS},\textsc{Julia}}
+\cvitem{Intermediate}{\textsc{python}, Jupyter Notebooks, \LaTeX, Linux, Parallel Computing}
+\cvitem{Advanced}{\textsc{R},R Markdown}
 
-% Do not remove the following line
-\bigskip
+%----------------------------------------------------------------------------------------
+%	COMMUNICATION SKILLS SECTION
+%----------------------------------------------------------------------------------------
 
-% comment, or uncomment, whichever you prefer to use
-Yours sincerely, % if the opening is "Dear Mr(s) Doe,"
-%Yours faithfully, % if the opening is "Dear Sir or Madam,"
+\section{Communication Skills}
 
-% Insert name of image with your signature
-% If paper colour is not white best to use PNG
-% with transparency.
-\closeletter{sig.png}
+\cvitem{2019}{Poster at the Advanced Technologies and Treatments for Diabetes Conference in Berlin, Germany}
+\cvitem{2017}{Poster at the North American Cystic Fibrosis Conference in Indianapolis, IN}
+\cvitem{2016}{Poster at the North American Cystic Fibrosis Conference in Orlando, FL}
+\cvitem{2015}{Poster at the North American Cystic Fibrosis Conference in Phoenix, AZ}
 
+%----------------------------------------------------------------------------------------
+%	INTERESTS SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Interests}
+
+\renewcommand{\listitemsymbol}{-~} % Changes the symbol used for lists
+
+\cvlistdoubleitem{Music}{Cooking}
+\cvlistdoubleitem{Running}{Reading}
+\cvlistdoubleitem{Videogames}{Basketball}
+
+%----------------------------------------------------------------------------------------
+\newpage
+\nocite{bergetSixMonthsHybrid2020,carreauClinicalPredictionScore2019,chanContinuousGlucoseMonitoring2018,chanHemoglobinA1cAccurately2018,liContinuousGlucoseMonitoring2019,messerRealWorldHybrid2020,odonnellPumpItRandomized2021,raviPediatricMedicaidPatients2020,shahTypeDiabetesOnset2019,sherkAcuteHyperinsulinemiaAlters2020,simonReducedInsulinSensitivity2018,sopfeSafetyAccuracyFactoryCalibrated2020,tommerdahlScreeningCysticFibrosisrelated2019,vigersCgmanalysisPackageDescriptive2019}
+\printbibliography[title={Publications}]
 \end{document}
