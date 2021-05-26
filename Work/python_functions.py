@@ -2,22 +2,16 @@
 #
 # This file contains several useful Python functions for statistical analysis.
 #
-# v 2.0
+# v 1.0
 # Tim Vigers
-# Last updated July 16, 2020
+# Last updated May 23, 2021
 #
 #-------------------------------------------------------------------------------
 
-# 2 component PCA on a pandas dataframe.
-def two_comp_pca(features,outcome,data):
-    x = data[features]
-    # Drop missing values
-    x = x.dropna()
-    # Scale columns
-    x = StandardScaler().fit_transform(x)
-    # PCA
-    pca = PCA(n_components=2)
-    pc = pca.fit_transform(x)
-    pcDf = pd.DataFrame(data = pc,
-                        columns = ['principal component 1','principal component 2'])
-    finalpcDf = pd.concat([pcDf, data[outcome]], axis = 1, join="inner")
+# Plot model residuals from a statmodels fit
+def plot_resid(model):
+    res = model.resid
+    ax = sns.kdeplot(mdf.resid, fill = True)
+    ax.set_title("KDE Plot of Model Residuals (Blue) and Normal Distribution (Black)")
+    ax.set_xlabel("Residuals")
+
